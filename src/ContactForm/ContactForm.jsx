@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import { Component } from 'react';
+import { nanoid } from 'nanoid';
 class ContactForm extends Component {
   state = {
     name: '',
     number: '',
   };
+  nameInputId = nanoid();
+  numberInputId = nanoid();
   handleInputChange = e => {
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
@@ -20,11 +23,12 @@ class ContactForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label>
+        <label htmlFor={this.nameInputId}>
           Name
           <input
             type="text"
             name="name"
+            id={this.nameInputId}
             value={this.state.name}
             onChange={this.handleInputChange}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -32,11 +36,12 @@ class ContactForm extends Component {
             required
           />
         </label>
-        <label>
+        <label htmlFor={this.numberInputId}>
           Number
           <input
             type="tel"
             name="number"
+            id={this.numberInputId}
             value={this.state.number}
             onChange={this.handleInputChange}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -49,4 +54,8 @@ class ContactForm extends Component {
     );
   }
 }
+ContactForm.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.number,
+};
 export default ContactForm;
