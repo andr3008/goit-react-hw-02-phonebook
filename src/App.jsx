@@ -26,16 +26,10 @@ class App extends Component {
 
     if (
       contacts.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase(),
+        contact => contact.name === name || contact.number === number,
       )
     ) {
-      toast.success(`${name} is already in contacts.`);
-    } else if (contacts.find(contact => contact.number === number)) {
-      toast.success(`${number} is already in contacts.`);
-    } else if (name.trim() === '' || number.trim() === '') {
-      toast.error("Enter the contact's name and number phone!");
-    } else if (!/\d{3}[-]\d{2}[-]\d{2}/g.test(number)) {
-      toast.error('Enter the correct number phone!');
+      toast.error(`${name} is already in contacts.`);
     } else {
       this.setState(({ contacts }) => ({
         contacts: [contact, ...contacts],
