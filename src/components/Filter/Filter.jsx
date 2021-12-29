@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types';
-
 import { Component } from 'react';
-
 import { nanoid } from 'nanoid';
-
 import { Label, Input } from './Filter.styled';
 
 class Filter extends Component {
   filterInputId = nanoid();
-
   render() {
     const { value, onChange } = this.props;
     return (
@@ -26,7 +22,6 @@ class Filter extends Component {
     );
   }
 }
-
 Filter.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,

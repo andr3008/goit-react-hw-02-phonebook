@@ -1,12 +1,9 @@
 import { Component } from 'react';
-
 import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import ContactList from './components/ContactList/ContactList';
-
 import toast, { Toaster } from 'react-hot-toast';
 import { nanoid } from 'nanoid';
-
 import { Title, TitleContacts, Wrapper, P } from './App.styled';
 
 class App extends Component {
@@ -14,8 +11,7 @@ class App extends Component {
     contacts: [],
     filter: '',
   };
-
-  componentDidMount() {
+componentDidMount() {
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
 
@@ -31,17 +27,14 @@ class App extends Component {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
-
-  addContact = ({ name, number }) => {
+addContact = ({ name, number }) => {
     const contact = {
       id: nanoid(),
       name,
       number,
     };
-
-    const { contacts } = this.state;
-
-    if (
+const { contacts } = this.state;
+if (
       contacts.find(
         contact => contact.name === name || contact.number === number,
       )
@@ -53,18 +46,15 @@ class App extends Component {
       }));
     }
   };
-
-  deleteContact = contactId => {
+deleteContact = contactId => {
     this.setState(({ contacts }) => ({
       contacts: contacts.filter(contact => contact.id !== contactId),
     }));
   };
-
-  changeFilter = e => {
+changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
   };
-
-  getVisibleContacts = () => {
+getVisibleContacts = () => {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
 
@@ -76,8 +66,7 @@ class App extends Component {
   render() {
     const { filter, contacts } = this.state;
     const visibleContacts = this.getVisibleContacts();
-
-    return (
+return (
       <Wrapper>
         <Toaster />
         <Title>Phonebook</Title>
@@ -98,5 +87,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;

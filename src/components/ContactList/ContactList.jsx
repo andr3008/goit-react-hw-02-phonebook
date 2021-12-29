@@ -1,13 +1,10 @@
 import PropTypes from 'prop-types';
-
 import { Component } from 'react';
-
 import { Ul, Li, Button, P } from './ContactList.styled';
 
 class ContactList extends Component {
   render() {
     const { contacts, onDeleteContact } = this.props;
-
     return (
       <Ul>
         {contacts.map(({ id, name, number }) => (
@@ -32,5 +29,6 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     }),
   ),
+  onDeleteContact: PropTypes.func.isRequired,
 };
 export default ContactList;
